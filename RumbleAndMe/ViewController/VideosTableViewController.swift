@@ -12,6 +12,8 @@ final class VideosTableViewController: UITableViewController {
     
     var videos: [VideoNodes] = []
     var selectedIndex: Int = 0 // default
+    private lazy var currentCell: VideoPlayerCell? = nil
+    private lazy var isVideoPaused: Bool = false // to track one time update
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,7 @@ final class VideosTableViewController: UITableViewController {
         if selectedIndex > 0 {
             let indexPath = IndexPath(row: selectedIndex, section: 0)
             tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+            setVideoPlayState(true)
         }
     }
 
@@ -44,18 +47,41 @@ final class VideosTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: VideoPlayerCell.self), for: indexPath)
         if let playerCell = cell as? VideoPlayerCell {
             playerCell.updateView(with: videos[indexPath.row])
-            playerCell.playVideo()
+            currentCell = playerCell
         }
         return cell
     }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.bounds.height
+    }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let videoCell = cell as? VideoPlayerCell {
-            videoCell.playVideo()
+    private func getCurrentVisibleCell() -> VideoPlayerCell? {
+        guard let currentCell = tableView.visibleCells.first as? VideoPlayerCell else { // since only once cell is possible to be visible
+            return nil
+        }
+        return currentCell
+    }
+    
+    // MARK: Scrollview delegates
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !isVideoPaused {
+           setVideoPlayState(false)
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.bounds.height
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // start playing video on
+        setVideoPlayState(true)
+    }
+    
+    func setVideoPlayState(_ shouldPlay: Bool) {
+        if shouldPlay {
+            getCurrentVisibleCell()?.playVideo()
+            isVideoPaused = false // reset state
+        } else {
+            getCurrentVisibleCell()?.pauseVideo()
+            isVideoPaused = true
+        }
     }
 }
