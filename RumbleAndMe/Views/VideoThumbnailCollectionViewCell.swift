@@ -18,7 +18,7 @@ final class VideoThumbnailCollectionViewCell: UICollectionViewCell {
     
     func updateView(with data: VideoNodes) {
         self.data = data
-        imageView.image = nil // reset the cached image
+        imageView.image = UIImage(named: "videoPlaceholder") // placeholder image
         showActivityIndicatorView(true)
         data.thumbnailImage { [weak self] image, urlString in
             guard let self = self else { return }
@@ -44,10 +44,11 @@ typealias ImageCompletion = (_ image: UIImage?, _ urlString: String) -> Void
 
 extension VideoNodes {
     func thumbnailImage(_ completion: @escaping ImageCompletion) {
-        guard let url = URL(string: video.encodeUrl) else {
+        /*guard let url = URL(fileURLWithPath: video.encodeUrl) else { // URL(string: video.encodeUrl)
             completion(nil, "")
             return
-        }
+        }*/
+        let url: URL = URL(fileURLWithPath: video.encodeUrl)
         guard let image = DataCache.shared.retrive(imageFor: url.absoluteString) else {
             url.thumnailImage { image, urlString in
                 if let unwrappedImage = image {

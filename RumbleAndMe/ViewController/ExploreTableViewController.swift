@@ -13,10 +13,12 @@ import AVFoundation
 class ExploreTableViewController: UITableViewController {
     
     private lazy var videos: [Videos] = []
-
+    private lazy var selectedVideoNodes: [VideoNodes] = []
+    private lazy var selectedVideoIndex: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareViews()
+        prepareTable(with: VideoListTableViewCell.self)
         fetchVideos()
     }
     
@@ -24,13 +26,6 @@ class ExploreTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    private func prepareViews() {
-        tableView.register(UINib(nibName: String(describing: VideoListTableViewCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing: VideoListTableViewCell.self))
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     private func fetchVideos() {
@@ -76,10 +71,26 @@ class ExploreTableViewController: UITableViewController {
 extension ExploreTableViewController: VideoListCellEvents {
     func videoListTableViewCell(_ cell: VideoListTableViewCell, didGenerateEvent event: VideoListCellEvent) {
         switch event {
-        case let .didSelectVideo(video):
-            let playerViewController = VideoPlayerViewController()
-            playerViewController.video = video
-            navigationController?.pushViewController(playerViewController, animated: true)
+        case let .didSelectVideo(videos, selectedIndex):
+            self.selectedVideoIndex = selectedIndex
+            selectedVideoNodes = videos
+            performSegue(withIdentifier: "showVideo", sender: self)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let videoPlayerVC = segue.destination  as? VideosTableViewController else { return }
+        videoPlayerVC.videos = selectedVideoNodes
+        videoPlayerVC.selectedIndex = selectedVideoIndex
+    }
+}
+
+extension UITableViewController {
+    func prepareTable(with cell: UITableViewCell.Type) {
+        tableView.register(UINib(nibName: String(describing: cell), bundle: Bundle.main), forCellReuseIdentifier: String(describing: cell))
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: .zero)
     }
 }

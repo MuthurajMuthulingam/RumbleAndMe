@@ -9,7 +9,7 @@
 import UIKit
 
 enum VideoListCellEvent {
-    case didSelectVideo(_ video: VideoNodes)
+    case didSelectVideo(_ videos: [VideoNodes], _ selectedIndex: Int)
 }
 
 protocol VideoListCellEvents: class {
@@ -61,6 +61,6 @@ UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.videoListTableViewCell(self, didGenerateEvent: .didSelectVideo(data[indexPath.item]))
+        delegate?.videoListTableViewCell(self, didGenerateEvent: .didSelectVideo(data, indexPath.item))
     }
 }

@@ -31,22 +31,41 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Explore" id="ZPc-qj-K6Q"/>
                     <connections>
-                        <segue destination="HB8-Ve-ung" kind="show" identifier="showVideo" id="obP-HS-ogJ"/>
+                        <segue destination="uya-hw-bwZ" kind="show" identifier="showVideo" id="De7-K6-RZf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLG-QD-42e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="151" y="16"/>
         </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="lOS-1F-Gtu">
+        <!--Videos Table View Controller-->
+        <scene sceneID="xFv-Re-QhC">
             <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="HB8-Ve-ung" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Aon-tW-zwW"/>
-                </avPlayerViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MNg-GR-2zx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tableViewController id="uya-hw-bwZ" customClass="VideosTableViewController" customModule="RumbleAndMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SFf-Um-7SF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="1xU-SQ-QmG">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1xU-SQ-QmG" id="CXy-NC-PN8">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uya-hw-bwZ" id="eTv-lF-krb"/>
+                            <outlet property="delegate" destination="uya-hw-bwZ" id="bDc-43-LpI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="78S-KQ-teL"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rD5-UM-Dbg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="15"/>
+            <point key="canvasLocation" x="997" y="2"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b5L-ea-XuT">
