@@ -65,9 +65,7 @@ final class VideosTableViewController: UITableViewController {
     
     // MARK: Scrollview delegates
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if !isVideoPaused {
            setVideoPlayState(false)
-        }
     }
     
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

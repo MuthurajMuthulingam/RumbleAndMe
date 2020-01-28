@@ -18,16 +18,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "76BB1FB3-38CC-4647-91EF-46FA113F22D4"
+            uuid = "EF923CE4-B8A7-4FCA-B4EE-613796BAB421"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RumbleAndMe/ViewController/VideosTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "viewDidAppear(_:)"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "setVideoPlayState(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2DBD6580-8964-462A-9C81-65AE105C242A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RumbleAndMe/ViewController/VideosTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "setVideoPlayState(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
