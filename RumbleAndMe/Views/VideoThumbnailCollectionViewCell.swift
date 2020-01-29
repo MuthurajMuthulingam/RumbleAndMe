@@ -11,7 +11,12 @@ import AVFoundation
 
 final class VideoThumbnailCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var imageView: UIImageView! {
+        didSet {
+            imageView.layer.cornerRadius = 10
+            imageView.clipsToBounds = true
+        }
+    }
     @IBOutlet private weak var activityImadicatorView: UIActivityIndicatorView!
     
     private var data: VideoNodes?
